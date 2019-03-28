@@ -4,6 +4,7 @@ require('dotenv').config()
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+require('dotenv').config();
 
 //app.use(methodOverride());
 app.use(function (req, res, next) {
