@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 module.exports =  {
   conn:function(){
    
-    const mongoDB = 'mongodb://Chicago:Chicago22@ds123346.mlab.com:23346/chicago';
+    const mongoDB = process.env.MONGO_URL;
     mongoose.connect(mongoDB,{ useNewUrlParser: true });
     mongoose.Promise = global.Promise;
     mongoose.set('useCreateIndex', true)
