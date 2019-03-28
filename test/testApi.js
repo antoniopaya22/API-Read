@@ -30,7 +30,7 @@ mocha.describe('search',function(){
     it('Data by ID: ',done=>{
         var token = auth.createToken(dBUsers.login("user","user").userName);
         chai.request(url)
-        .get('/data/ID_AS9')
+        .get('/data/ID_CH2')
         .set('Authorization',token)
         .end(function(err,res){
             expect(res).to.have.status(200);
