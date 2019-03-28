@@ -48,7 +48,6 @@ mocha.describe('search',function(){
         .end(function(err,res){
             expect(res).to.have.status(200);
             res.body.should.be.a('array');
-            res.body.length.should.be.eql(3);
             done();
         })
 
