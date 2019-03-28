@@ -1,6 +1,6 @@
 let express = require('express');
 let app = express();
-
+require('dotenv').config()
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,11 +17,14 @@ const dbConection = require('./utils/dbConection');
 dbConection.conn();
 
 
-
 let dBData = require('./modules/dBData');
+let dBUsers = require('./modules/dbUser');
 
 require("./routes/rdata.js")(app, dBData);
+require("./routes/rusers.js")(app, dBUsers);
 
-app.listen(3000, function(){
+app.set("port", 3000);
 
+app.listen(app.get("port"), function () {
+    console.log("Servidor activo en el puerto: "+ app.get("port"))
 });

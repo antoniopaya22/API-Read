@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-
+// Define schema
 let Schema = mongoose.Schema;
 
 let DataSchema = new Schema({
@@ -10,4 +10,5 @@ let DataSchema = new Schema({
     hour: String
 });
 
+//Export function to create "Acta" model class
 module.exports = mongoose.model('datos', DataSchema );
