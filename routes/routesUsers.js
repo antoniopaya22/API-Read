@@ -8,7 +8,7 @@ module.exports=function(app,mongo){
         mongo.createUser(userName, password).then(user=>{
             res.send(user)
         }).catch(err=> {
-            res.status(500).send("Cant create user :"+err)
+            res.status(500).json({ error: err.toString() });
         })
     });
 
@@ -17,7 +17,7 @@ module.exports=function(app,mongo){
             console.log(req.body.userName);
             res.send(auth.createToken(doc.userName))
         }).catch(err =>{
-            res.status(403).send(err)
+            res.status(403).json({ error: err.toString() });
         });
     });
 

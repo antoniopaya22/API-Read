@@ -6,52 +6,39 @@ let should = chai.should();
 require('dotenv').config()
 const dbConection = require('../utils/dbConection');
 dbConection.conn();
-const dBData = require('../modules/dBData');
 const dBUsers = require('../modules/dbUser');
 const auth = require("../utils/authentication")
-
 chai.use(chaiHttp);
 const url= 'http://localhost:3000';
 
-mocha.describe('login',function(){
+
+mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function () {
     this.timeout(5000);
-    it('Deberia loguearse y devolver el token',done=>{
-        chai.request(url)
-        .post('/login')
-        .send({userName:"user", password: "user"})
-        .end(function(err,res){
-            expect(res).to.have.status(200);
-            done();
-        });
+
+	it('Correct Login', (done) => {
+		chai.request(url)
+			.post('/login')
+			.send({userName:"user", password: "user",})
+			.end( function(err,res){
+				expect(res).to.have.status(200);
+				done();
+			});
     });
+
+	it('Wrong Login', (done) => {
+		chai.request(url)
+			.post('/login')
+			.send({userName:"userX", password: "user",})
+			.end( function(err,res){
+				expect(res).to.have.status(403);
+				done();
+			});
+    });
+    
 });
 
-mocha.describe('search',function(){
-    it('Data by ID: ',done=>{
-        var token = auth.createToken(dBUsers.login("user","user").userName);
-        chai.request(url)
-        .get('/data/ID_CH2')
-        .set('Authorization',token)
-        .end(function(err,res){
-            expect(res).to.have.status(200);
-            res.body.should.be.a('array');
-            done();
-        })
-    });
-
-    it('Data by date: ',done=>{
-        var token = auth.createToken(dBUsers.login("user","user").userName);
-        chai.request(url)
-        .get('/specificdata?startDate=1&endDate=100')
-        .set('Authorization',token)
-        .end(function(err,res){
-            expect(res).to.have.status(200);
-            res.body.should.be.a('array');
-            done();
-        }) 
-    });
-
-    it('all data: ',done=>{
+mocha.describe('Prueba a buscar todos los datos',function(){
+    it('Get all data: ', (done) =>{
         var token = auth.createToken(dBUsers.login("user","user").userName);
         chai.request(url)
         .get('/data')
@@ -60,6 +47,22 @@ mocha.describe('search',function(){
             expect(res).to.have.status(200);
             res.body.should.be.a('array');
             done();
+        }) 
+    });
+});
+
+mocha.describe('Prueba a buscar un dato por id',function(){
+
+    it('Get by id: ', (done) =>{
+        var token = auth.createToken(dBUsers.login("user","user").userName);
+        chai.request(url)
+        .get('/data/ID_AS')
+        .set('Authorization',token)
+        .end(function(err,res){
+            expect(res).to.have.status(200);
+            res.body.should.be.a('array');
+            done();
         })
     });
+
 });

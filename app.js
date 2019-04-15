@@ -33,8 +33,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 dbConection.conn();
 
 //==========RUTAS================
-require("./routes/rdata.js")(app, dBData);
-require("./routes/rusers.js")(app, dBUsers);
+require("./routes/routesDatos.js")(app, dBData);
+require("./routes/routesUsers.js")(app, dBUsers);
 
 
 //===========RUN===============
