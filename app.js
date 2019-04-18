@@ -9,12 +9,13 @@
  */
 
 //==========MODULOS===============
-const dbConection = require('./utils/dbConection');
+const dbConection = require('./modules/dbConection');
 let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let dBData = require('./modules/dBData');
 let dBUsers = require('./modules/dbUser');
+let auth = require('../modules/authentication/authentication')
 require('dotenv').config()
 
 //==========VARIABLES===============
@@ -33,8 +34,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 dbConection.conn();
 
 //==========RUTAS================
-require("./routes/routesDatos.js")(app, dBData);
-require("./routes/routesUsers.js")(app, dBUsers);
+require("./routes/routesDatos.js")(app, dBData, auth);
+require("./routes/routesUsers.js")(app, dBUsers, auth);
 
 
 //===========RUN===============

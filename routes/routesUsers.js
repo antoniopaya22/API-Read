@@ -1,6 +1,5 @@
-const auth=require('../utils/authentication');
 
-module.exports=function(app,mongo){
+module.exports=function(app,mongo,auth){
 
     app.post("/register", function (req, res) {
         let userName = req.body.userName;
