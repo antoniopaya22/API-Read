@@ -4,7 +4,7 @@ let chaiHttp = require('chai-http');
 const expect = require('chai').expect;
 let should = chai.should();
 require('dotenv').config()
-const dbConection = require('../utils/dbConection');
+const dbConection = require('../modules/dbConection');
 dbConection.conn();
 const dBUsers = require('../modules/dbUser');
 const auth = require("../utils/authentication")
