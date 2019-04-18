@@ -1,6 +1,5 @@
-const auth=require('../utils/authentication')
 
-module.exports = function (app ,dBData) {
+module.exports = function (app ,dBData, auth) {
 
     /**
      * GET all datos
