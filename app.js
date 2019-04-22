@@ -15,7 +15,7 @@ require('dotenv').config()
 let bodyParser = require('body-parser');
 let dBData = require('./modules/dBData');
 let dBUsers = require('./modules/dbUser');
-let auth = require('../modules/authentication/authentication')
+let auth = require('./modules/authentication/authentication')
 
 
 //==========VARIABLES===============
