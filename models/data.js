@@ -1,6 +1,7 @@
 let mongoData = require('../modules/mongoData');
+const mongoose = require('mongoose');
 // Define schema
-let Schema = mongoData.Schema;
+let Schema = mongoose.Schema;
 
 let DataSchema = new Schema({
     id: String,

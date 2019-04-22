@@ -2,8 +2,9 @@
 
 const mongoUsers = require("../modules/mongoUsers")
 const crypto = require("crypto")
+const mongoose = require('mongoose');
 
-const userSchema = new mongoUsers.Schema({
+const userSchema = new mongoose.Schema({
     userName: { type: String, required: true, unique: true, index: true , trim:true},
     hash: { type: String },
     salt: { type: String},
