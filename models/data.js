@@ -1,4 +1,5 @@
-let mongoose = require('mongoose');
+let mongoData = require('../modules/mongoData');
+const mongoose = require('mongoose');
 // Define schema
 let Schema = mongoose.Schema;
 
@@ -10,5 +11,4 @@ let DataSchema = new Schema({
     hour: String
 });
 
-//Export function to create "Acta" model class
-module.exports = mongoose.model('datos', DataSchema );
+module.exports = mongoData.model('datos', DataSchema );
