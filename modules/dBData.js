@@ -9,7 +9,6 @@ module.exports = {
                 Callback(err);
             }
             else {
-                console.log("data=",docs)
                 Callback(docs);
             }
         });
