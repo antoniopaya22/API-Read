@@ -4,6 +4,7 @@ module.exports = {
 
     createUser: (userName, password, rol) => {
         return user.findOne({userName:userName}).then(doc => {
+            console.log(doc);
             if(doc !== null){
                 return new Promise((res, rej) => {
                     rej("Usuario ya existente");
@@ -17,6 +18,7 @@ module.exports = {
                         res(doc)
                     })
                 }).catch(err => {
+                    console.log(err);
                     rej(err)
                 })
             });
