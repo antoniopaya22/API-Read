@@ -9,14 +9,14 @@
  */
 
 //==========MODULOS===============
-const dbConection = require('./modules/dbConection');
 let express = require('express');
 let app = express();
-let bodyParser = require('body-parser');
-let dBData = require('./modules/dBData');
-let dBUsers = require('./modules/dbUser');
-let auth = require('../modules/authentication/authentication')
 require('dotenv').config()
+let bodyParser = require('body-parser');
+let dBUsers = require('./modules/dbUser');
+let dBData = require('./modules/dBData');
+let auth = require('./modules/authentication/authentication')
+
 
 //==========VARIABLES===============
 app.set("port", 3000);
@@ -31,7 +31,6 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-dbConection.conn();
 
 //==========RUTAS================
 require("./routes/routesDatos.js")(app, dBData, auth);

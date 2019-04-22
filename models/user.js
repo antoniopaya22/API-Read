@@ -1,18 +1,23 @@
 "use strict"
 
-const mongoose = require("mongoose")
+const mongoUsers = require("../modules/mongoUsers")
 const crypto = require("crypto")
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     userName: { type: String, required: true, unique: true, index: true , trim:true},
     hash: { type: String },
     salt: { type: String},
+    rol: { type: String }
 }, { autoIndex: false })
 
 class UserClass {
     setPassword(password) {
         this.salt = crypto.randomBytes(16).toString("hex")
         this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, `sha512`).toString(`hex`)
+    }
+    setRol(rol){
+        this.rol = rol;
     }
     static validate(userName, password) {
         return new Promise((res, rej) => {
@@ -36,4 +41,4 @@ class UserClass {
 }
 
 userSchema.loadClass(UserClass)
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoUsers.model("User", userSchema)

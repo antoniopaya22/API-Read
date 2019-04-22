@@ -4,10 +4,9 @@ let chaiHttp = require('chai-http');
 const expect = require('chai').expect;
 let should = chai.should();
 require('dotenv').config()
-const dbConection = require('../modules/dbConection');
-dbConection.conn();
 const dBUsers = require('../modules/dbUser');
-const auth = require("../utils/authentication")
+const auth = require("../modules/authentication/authentication")
+const roles = require('../models/roles')
 chai.use(chaiHttp);
 const url= 'http://localhost:3000';
 
@@ -18,7 +17,7 @@ mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function
 	it('Correct Login', (done) => {
 		chai.request(url)
 			.post('/login')
-			.send({userName:"user", password: "user",})
+			.send({userName:"user_brasil", password: "user_brasil"})
 			.end( function(err,res){
 				expect(res).to.have.status(200);
 				done();
@@ -39,7 +38,7 @@ mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function
 
 mocha.describe('Prueba a buscar todos los datos',function(){
     it('Get all data: ', (done) =>{
-        var token = auth.createToken(dBUsers.login("user","user").userName);
+        var token = auth.createToken(dBUsers.login("user_brasil","user_brasil").userName, roles.empleado_brasil);
         chai.request(url)
         .get('/data')
         .set('Authorization',token)
@@ -54,7 +53,7 @@ mocha.describe('Prueba a buscar todos los datos',function(){
 mocha.describe('Prueba a buscar un dato por id',function(){
 
     it('Get by id: ', (done) =>{
-        var token = auth.createToken(dBUsers.login("user","user").userName);
+        var token = auth.createToken(dBUsers.login("user_brasil","user_brasil").userName, roles.empleado_brasil);
         chai.request(url)
         .get('/data/ID_AS')
         .set('Authorization',token)
