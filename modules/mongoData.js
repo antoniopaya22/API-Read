@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const mongoDB = process.env.MONGO_URL;
-var conn = mongoose.createConnection(mongoDB,{ useNewUrlParser: true });
+var conn = mongoose.createConnection(mongoDB,{ useNewUrlParser: true, poolSize: 4 });
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true)
 conn.on('error', console.error.bind(console, 'MongoDB connection error:'));
-module.exports = exports = conn;
+module.exports = exports = mongoose;
