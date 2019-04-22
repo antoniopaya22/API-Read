@@ -11,11 +11,12 @@
 //==========MODULOS===============
 let express = require('express');
 let app = express();
+require('dotenv').config()
 let bodyParser = require('body-parser');
 let dBData = require('./modules/dBData');
 let dBUsers = require('./modules/dbUser');
 let auth = require('../modules/authentication/authentication')
-require('dotenv').config()
+
 
 //==========VARIABLES===============
 app.set("port", 3000);
