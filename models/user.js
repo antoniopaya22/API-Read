@@ -7,12 +7,16 @@ const userSchema = new mongoUsers.Schema({
     userName: { type: String, required: true, unique: true, index: true , trim:true},
     hash: { type: String },
     salt: { type: String},
+    rol: { type: String }
 }, { autoIndex: false })
 
 class UserClass {
     setPassword(password) {
         this.salt = crypto.randomBytes(16).toString("hex")
         this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, `sha512`).toString(`hex`)
+    }
+    setRol(rol){
+        this.rol = rol;
     }
     static validate(userName, password) {
         return new Promise((res, rej) => {
