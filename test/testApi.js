@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 let should = chai.should();
 require('dotenv').config()
 const dBUsers = require('../modules/dbUser');
-const auth = require("../utils/authentication")
+const auth = require("../modules/authentication/authentication")
 chai.use(chaiHttp);
 const url= 'http://localhost:3000';
 
