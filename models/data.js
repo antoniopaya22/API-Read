@@ -10,5 +10,4 @@ let DataSchema = new Schema({
     hour: String
 });
 
-//Export function to create "Acta" model class
 module.exports = mongoData.model('datos', DataSchema );

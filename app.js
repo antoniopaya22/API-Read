@@ -13,8 +13,8 @@ let express = require('express');
 let app = express();
 require('dotenv').config()
 let bodyParser = require('body-parser');
-let dBData = require('./modules/dBData');
 let dBUsers = require('./modules/dbUser');
+let dBData = require('./modules/dBData');
 let auth = require('./modules/authentication/authentication')
 
 
