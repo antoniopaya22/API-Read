@@ -1,18 +1,27 @@
-const mongoose = require('mongoose');
 const user=require('../models/user');
 
 module.exports = {
 
-    createUser: (userName, password) => {
-        return new Promise((res, rej) => {
-            user.create({ userName: userName }).then(doc => {
-                doc.setPassword(password)
-                doc.save().then(() => {
-                    res(doc)
+    createUser: (userName, password, rol) => {
+        return user.findOne({userName:userName}).then(doc => {
+            if(doc !== null){
+                return new Promise((res, rej) => {
+                    rej("Usuario ya existente");
+                });
+            }
+            return new Promise((res, rej) => {
+                user.create({ userName: userName }).then(doc => {
+                    doc.setPassword(password)
+                    doc.setRol(rol)
+                    doc.save().then(() => {
+                        res(doc)
+                    })
+                }).catch(err => {
+                    rej(err)
                 })
-            }).catch(err => {
-                rej(err)
-            })
+            });
+        }).catch(err =>{
+            return {Error: err};
         })
     },
 

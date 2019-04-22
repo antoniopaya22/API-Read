@@ -1,6 +1,6 @@
 "use strict"
 
-const mongoose = require("mongoose")
+const mongoUsers = require("../modules/mongoUsers")
 const crypto = require("crypto")
 
 const userSchema = new mongoose.Schema({
@@ -36,4 +36,4 @@ class UserClass {
 }
 
 userSchema.loadClass(UserClass)
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoUsers.model("User", userSchema)

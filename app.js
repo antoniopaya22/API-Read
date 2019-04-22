@@ -9,7 +9,6 @@
  */
 
 //==========MODULOS===============
-const dbConection = require('./modules/dbConection');
 let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
@@ -31,7 +30,6 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-dbConection.conn();
 
 //==========RUTAS================
 require("./routes/routesDatos.js")(app, dBData, auth);
