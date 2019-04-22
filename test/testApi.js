@@ -6,6 +6,7 @@ let should = chai.should();
 require('dotenv').config()
 const dBUsers = require('../modules/dbUser');
 const auth = require("../modules/authentication/authentication")
+const roles = require('../models/roles')
 chai.use(chaiHttp);
 const url= 'http://localhost:3000';
 
@@ -37,7 +38,7 @@ mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function
 
 mocha.describe('Prueba a buscar todos los datos',function(){
     it('Get all data: ', (done) =>{
-        var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName);
+        var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName, roles.empleado_asturias);
         chai.request(url)
         .get('/data')
         .set('Authorization',token)
@@ -52,7 +53,7 @@ mocha.describe('Prueba a buscar todos los datos',function(){
 mocha.describe('Prueba a buscar un dato por id',function(){
 
     it('Get by id: ', (done) =>{
-        var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName);
+        var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName, roles.empleado_asturias);
         chai.request(url)
         .get('/data/ID_AS')
         .set('Authorization',token)
