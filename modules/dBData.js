@@ -3,7 +3,7 @@ const Data = require('../models/data')
 module.exports = {
 
     getAllData: function (Callback) {
-        console.log(Data.host);
+        console.log(Data.model.host);
         Data.find({}, function (err, docs) { 
             if (err) {
                 Callback(err);
