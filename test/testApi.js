@@ -18,7 +18,7 @@ mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function
 	it('Correct Login', (done) => {
 		chai.request(url)
 			.post('/login')
-			.send({userName:"user", password: "user",})
+			.send({userName:"empleado_asturias", password: "empleado_asturias",})
 			.end( function(err,res){
 				expect(res).to.have.status(200);
 				done();
@@ -39,7 +39,7 @@ mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function
 
 mocha.describe('Prueba a buscar todos los datos',function(){
     it('Get all data: ', (done) =>{
-        var token = auth.createToken(dBUsers.login("user","user").userName);
+        var token = auth.createToken(dBUsers.login("empleado_asturias","empleado_asturias").userName);
         chai.request(url)
         .get('/data')
         .set('Authorization',token)
@@ -54,7 +54,7 @@ mocha.describe('Prueba a buscar todos los datos',function(){
 mocha.describe('Prueba a buscar un dato por id',function(){
 
     it('Get by id: ', (done) =>{
-        var token = auth.createToken(dBUsers.login("user","user").userName);
+        var token = auth.createToken(dBUsers.login("empleado_asturias","empleado_asturias").userName);
         chai.request(url)
         .get('/data/ID_AS')
         .set('Authorization',token)
