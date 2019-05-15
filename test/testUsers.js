@@ -4,7 +4,7 @@ let chaiHttp = require('chai-http');
 const expect = require('chai').expect;
 let should = chai.should();
 require('dotenv').config()
-const dBUsers = require('../modules/dbUser');
+const mongo = require('../modules/dbUser');
 const auth = require("../modules/authentication/authentication")
 const roles = require('../models/roles')
 chai.use(chaiHttp);
