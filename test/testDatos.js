@@ -11,33 +11,8 @@ chai.use(chaiHttp);
 const url= 'http://localhost:3000';
 
 
-mocha.describe('Prueba a realizar un Login correcto y uno incorrecto: ',function () {
-    this.timeout(5000);
-
-	it('Correct Login', (done) => {
-		chai.request(url)
-			.post('/login')
-			.send({userName:"user_asturias", password: "user_asturias"})
-			.end( function(err,res){
-				expect(res).to.have.status(200);
-				done();
-			});
-    });
-
-	it('Wrong Login', (done) => {
-		chai.request(url)
-			.post('/login')
-			.send({userName:"userX", password: "user",})
-			.end( function(err,res){
-				expect(res).to.have.status(403);
-				done();
-			});
-    });
-    
-});
-
-mocha.describe('Prueba a buscar todos los datos',function(){
-    it('Get all data: ', (done) =>{
+mocha.describe('Buscar datos tests',function(){
+    it('Buscar todos los datos: ', (done) =>{
         var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName, roles.empleado_asturias);
         chai.request(url)
         .get('/data')
@@ -48,11 +23,8 @@ mocha.describe('Prueba a buscar todos los datos',function(){
             done();
         }) 
     });
-});
 
-mocha.describe('Prueba a buscar un dato por id',function(){
-
-    it('Get by id: ', (done) =>{
+    it('Buscar dato existente dado su id: ', (done) =>{
         var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName, roles.empleado_asturias);
         chai.request(url)
         .get('/data/ID_AS')
@@ -64,4 +36,17 @@ mocha.describe('Prueba a buscar un dato por id',function(){
         })
     });
 
+    it('Buscar dato no existente dado su id: ', (done) =>{
+        var token = auth.createToken(dBUsers.login("user_asturias","user_asturias").userName, roles.empleado_asturias);
+        chai.request(url)
+        .get('/data/XXX')
+        .set('Authorization',token)
+        .end(function(err,res){
+            expect(res).to.have.status(200);
+            res.body.should.be.a('array');
+            res.body.length.should.be.eql(0);
+            done();
+        })
+    });
 });
+
