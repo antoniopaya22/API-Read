@@ -46,7 +46,7 @@ mocha.describe('Usuarios tests',function(){
 		}
 		var token = auth.createToken(mongo.login("gestor","gestor").userName, roles.gestor_usuarios)
 		chai.request(url)
-            .post('/registerAuditor')
+            .post('/registerUser')
             .set('Authorization',token)
 			.send(user)
 			.end((err, res) => {
@@ -60,9 +60,9 @@ mocha.describe('Usuarios tests',function(){
 			"userName": "antonio_as",
 			"password": "antonio_as"
 		}
-		var token = auth.createToken(mongo.login("auditor","auditor").userName, roles.auditor)
+		var token = auth.createToken(mongo.login("auditor","auditor").userName, roles.empleado_asturias)
 		chai.request(url)
-            .post('/registerAuditor')
+            .post('/registerUser')
             .set('Authorization',token)
 			.send(user)
 			.end((err, res) => {
