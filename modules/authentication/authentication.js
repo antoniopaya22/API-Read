@@ -14,7 +14,7 @@ module.exports = {
     isAuth: function (req, res, next) {
         try {
             jwt.verify(req.headers.authorization, pub, function(err, decoded) {
-                if(decoded.rol === process.env.ROL || decoded.rol === roles.auditor) next();
+                if(decoded.rol === process.env.ROL || decoded.rol === roles.empleado_asturias) next();
                 else  res.status(403).send("Invalid authorization: Usuario no es empleado de la base de datos local");
             });
         } catch (err) {
